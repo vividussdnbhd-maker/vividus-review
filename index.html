@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vividus — Share Your Experience</title>
+<meta name="description" content="Share your honest experience at Vividus on Google.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== CONFIG: brand colours (sampled from the Vividus logo) ===== */
+  :root{
+    --green:#84B242;      /* logo green */
+    --green-d:#4C8424;    /* deeper green for buttons/text (readable on white) */
+    --green-t:#F1F7E8;    /* green tint backgrounds */
+    --blue:#3D66A8;       /* logo blue */
+    --blue-d:#284A80;
+    --blue-t:#EDF2FA;
+    --grey:#787878;       /* logo grey */
+    --red:#E1262B;        /* logo cross — accent only */
+    --ink:#1E2B3A; --muted:#66707C; --line:#E4E8EC; --bg:#F6F8F5; --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans","Noto Sans SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:520px;margin:0 auto;min-height:100vh;background:var(--white);display:flex;flex-direction:column;box-shadow:0 0 0 1px var(--line)}
+  header{padding:18px 20px 0;background:var(--white)}
+  .brand{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand img{height:46px;width:auto;display:block}
+  .langs{display:flex;background:#F1F3F2;border-radius:999px;padding:3px}
+  .langs button{border:0;background:transparent;color:var(--grey);font:inherit;font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;cursor:pointer}
+  .langs button.on{background:var(--white);color:var(--green-d);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+  .hero{margin-top:18px;border-radius:20px;padding:22px 20px 20px;color:var(--white);position:relative;overflow:hidden;
+        background:linear-gradient(125deg,#8DC447 0%,#4FAE52 50%,#2E9C8F 78%,#3D78BE 100%)}
+  .hero::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.10)}
+  .hero::before{content:"";position:absolute;right:30px;bottom:-60px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.07)}
+  .hero h1{font-size:24px;font-weight:800;line-height:1.25;position:relative;z-index:1}
+  .hero p{font-size:14px;opacity:.95;margin-top:6px;position:relative;z-index:1;max-width:34ch}
+  .steps{display:flex;align-items:center;gap:8px;margin:18px 0 0;padding:0 2px}
+  .dot{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#A3AAB2}
+  .dot i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;background:#EEF0F2;color:#9AA1A9;transition:all .2s}
+  .dot.on{color:var(--ink)} .dot.on i{background:var(--green);color:var(--white)}
+  .dot.done i{background:var(--green-t);color:var(--green-d)}
+  .sep{flex:1;height:2px;background:#EEF0F2;border-radius:2px;overflow:hidden}
+  .sep span{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+  .sep.done span{width:100%}
+  main{padding:22px 20px 28px;flex:1}
+  .step{display:none;animation:in .25s ease}
+  .step.on{display:block}
+  @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{font-size:19px;font-weight:800;margin-bottom:4px;color:var(--ink)}
+  .hint{font-size:13px;color:var(--muted);margin-bottom:16px}
+  .modes{display:grid;gap:10px}
+  .mode{display:flex;align-items:center;gap:14px;border:1.5px solid var(--line);border-radius:16px;padding:15px 16px;background:var(--white);cursor:pointer;text-align:left;font:inherit;color:inherit;transition:border-color .15s,box-shadow .15s,transform .1s}
+  .mode:hover{border-color:var(--green);box-shadow:0 6px 18px rgba(76,132,36,.12)}
+  .mode:active{transform:scale(.99)}
+  .mode .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex-shrink:0}
+  .mode .ic svg{width:24px;height:24px}
+  .ic.g{background:var(--green-t);color:var(--green-d)}
+  .ic.b{background:var(--blue-t);color:var(--blue)}
+  .mode b{display:block;font-size:15px}
+  .mode small{color:var(--muted);font-size:12.5px}
+  .mode .arr{margin-left:auto;color:#B8BEC5;font-size:18px}
+  .group{margin-bottom:22px}
+  .label{font-size:14px;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .label em{font-style:normal;font-weight:500;color:var(--muted);font-size:12px;white-space:nowrap}
+  .rate{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  .rate button{border:1.5px solid var(--line);background:var(--white);border-radius:12px;padding:10px 2px 8px;font:inherit;cursor:pointer;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .12s}
+  .rate button b{font-size:18px;font-weight:800;color:var(--muted)}
+  .rate button span{font-size:10.5px;overflow-wrap:anywhere;line-height:1.2;color:var(--muted);text-align:center}
+  .rate button.on{background:var(--blue-t);border-color:var(--blue)}
+  .rate button.on b,.rate button.on span{color:var(--blue-d);font-weight:700}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1.5px solid var(--line);background:var(--white);border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;font-weight:500;cursor:pointer;color:var(--ink);transition:all .12s}
+  .chip:hover{border-color:#C9D9B5}
+  .chip.on{background:var(--green-t);border-color:var(--green);color:var(--green-d);font-weight:700}
+  .chip.on::before{content:"✓ "}
+  .chips.blue .chip.on{background:var(--blue-t);border-color:var(--blue);color:var(--blue-d)}
+  input[type=text],textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:15px;color:var(--ink);background:var(--white);outline:none;resize:vertical;transition:border-color .15s,box-shadow .15s}
+  input[type=text]:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(132,178,66,.18)}
+  textarea{min-height:96px}
+  #draft{min-height:190px;background:#FBFDF8;border-color:#D6E6C2}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:14px;padding:15px 18px;font:inherit;font-size:15px;font-weight:800;cursor:pointer;text-decoration:none;transition:transform .08s,box-shadow .15s}
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:linear-gradient(135deg,#6FA83A,var(--green-d));color:var(--white);box-shadow:0 8px 20px rgba(76,132,36,.25)}
+  .btn-dark{background:linear-gradient(135deg,var(--blue),var(--blue-d));color:var(--white);box-shadow:0 8px 20px rgba(40,74,128,.25)}
+  .btn-ghost{background:var(--white);color:var(--ink);border:1.5px solid var(--line);font-weight:700}
+  .btn-ghost:hover{border-color:var(--green)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  .stack{display:grid;gap:10px;margin-top:16px}
+  .back{background:none;border:0;font:inherit;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;margin-bottom:14px;padding:0}
+  .note{font-size:12.5px;color:var(--muted);background:var(--bg);border-radius:12px;padding:11px 13px;margin-top:12px;display:flex;gap:9px}
+  .note::before{content:"i";flex-shrink:0;width:18px;height:18px;border-radius:50%;background:var(--blue-t);color:var(--blue);font-weight:800;font-size:11px;display:grid;place-items:center;font-style:italic}
+  .warn{font-size:12.5px;color:#9A1B1F;background:#FDECEC;border-radius:10px;padding:10px 12px;margin-top:10px;display:none}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--white);padding:10px 16px;border-radius:999px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:all .25s}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .count{font-size:12px;color:var(--muted);text-align:right;margin-top:4px}
+  footer{font-size:11.5px;color:var(--grey);text-align:center;padding:16px 20px 24px;border-top:1px solid var(--line)}
+  footer b{color:var(--red)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAApMAAAD5CAMAAABMOE7aAAAAwFBMVEXe4OSesdFpiLjjLC/s8O3e395yk8S2xt691aTtoaOXw1+Afn7B2J2AfoBcW1znZ2hweYuRn3k2X56dnqHNvcB/gH/iOUDif4H+/v6EskJ3d3c7ZqiBsT2BrkGArj18rDl9sTuGhoZra2vZ6cqnp6jIyMi2tra31JLF26rO47Slx3aWlpbs9eTl8tl+sUGuy4eYu2Tn5+ibw2hBaqvh7dXS0tPZ2dkyW5wzXaN9rUFQd7Li4+Ps9OjN2OnbKi6Nps1XGfhQAAAAQHRSTlP7////XJf///////////////////////8A////////////////9v//////////////bv///86u/////4Zq////0zUS5AAAK9JJREFUeNrtnQl346i2qJ10pk6lbtdwzn1SLFlSZFuyPDuOEw/p/P9/9QBNCNgIJDtx3cU+63RVJbYG+NgTG+hYRoycl3RMExgxTBoxYpg0Ypg0YsQwacQwacSIYdKIYdKIEcOkESOGSSOGSSNG/k8yub99X5p+M0ye0wPvut3du+k4w+T5yMevt9fXndGUhsnzkcvX7uvb643pOcPkOTH59vb2emu6zjB5NrYbMdntvl2arjNMnou8v3aJGEVpmDwb2b0RJo1HaZg8J+ONxeSDDJNnI/vUdnc/TOcZJs/GeKdM7q5M7xkmz0QuuibKMUye2SNnTJooxzB5LrLMmNyZmibD5LnIcwblhek+w+R5BTnGeBsmz0YuDZOGyTNlsmvS5obJc2PSOJSGyTNj8s1M5Rgmz01PGofSMHluTJoiSsPkuTG5M/1nmDy9TEZRtFrN4/AgY/LZlGEYJj9J1pFtOzb6P/rPPJQxmVK5Nx1omDytICJpSaYWMI/z/JwyaWa8DZOnNdsrp8qkY49En3tHMGZMmqS5YfKkdvve5sQXQXmL1aRh0jB5cpnaInFDUU3vs9GThslPkJUvhNKecJ/8IHry2TBpmDytjAAk7Yj95HJnmDRMfkZ8s4CYtEM+xCmYNLkgw+TJJHYgJJ2IdydzJs08jmHydDIHmbRXFpcxz5k0892GydNJAppu1ni/PxsmDZOfIIcFrCftmIm6SyZN/aRh8mSytiVMzulPXu263SJnbnYdMEyekElbkcnbrPri2SzwNkye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" alt="Vividus — Walk Freely + Live Vividly">
+      <div class="langs" role="group" aria-label="Language">
+        <button data-lang="en">EN</button>
+        <button data-lang="ms">BM</button>
+        <button data-lang="zh">中文</button>
+      </div>
+    </div>
+    <div class="hero">
+      <h1 data-t="title"></h1>
+      <p data-t="subtitle"></p>
+    </div>
+    <div class="steps" id="steps">
+      <div class="dot"><i>1</i><span data-t="st1"></span></div>
+      <div class="sep"><span></span></div>
+      <div class="dot"><i>2</i><span data-t="st2"></span></div>
+      <div class="sep"><span></span></div>
+      <div class="dot"><i>3</i><span data-t="st3"></span></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- STEP 0: who -->
+    <section class="step on" id="s0">
+      <h2 data-t="whoTitle"></h2>
+      <p class="hint" data-t="whoHint"></p>
+      <div class="modes">
+        <button class="mode" data-mode="first"><span class="ic g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="M7 21l3-6 3 2v5"/><path d="M10 15l1-6 4 3h3"/><path d="M11 9l-3 2-1 3"/></svg></span><span><b data-t="mFirst"></b><small data-t="mFirstS"></small></span><span class="arr">›</span></button>
+        <button class="mode" data-mode="return"><span class="ic b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></span><span><b data-t="mReturn"></b><small data-t="mReturnS"></small></span><span class="arr">›</span></button>
+        <button class="mode" data-mode="family"><span class="ic g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M2.5 20c.6-3.5 2.8-5.5 5.5-5.5s4.9 2 5.5 5.5"/><path d="M14 20c.4-2.6 1.6-4 3-4s2.8 1.4 3.3 4"/></svg></span><span><b data-t="mFamily"></b><small data-t="mFamilyS"></small></span><span class="arr">›</span></button>
+      </div>
+    </section>
+
+    <!-- STEP 1: details -->
+    <section class="step" id="s1">
+      <button class="back" data-go="0">← <span data-t="back"></span></button>
+      <div class="group">
+        <div class="label"><span data-t="qRating"></span></div>
+        <div class="rate" id="rate"></div>
+      </div>
+      <div class="group">
+        <div class="label"><span data-t="qService"></span><em data-t="pickAny"></em></div>
+        <div class="chips" id="chipsService"></div>
+      </div>
+      <div class="group">
+        <div class="label"><span data-t="qHighlight"></span><em data-t="pickAny"></em></div>
+        <div class="chips blue" id="chipsHighlight"></div>
+      </div>
+      <div class="group" id="recoGroup">
+        <div class="label"><span data-t="qReco"></span><em data-t="pickAny"></em></div>
+        <div class="chips" id="chipsReco"></div>
+      </div>
+      <div class="group">
+        <div class="label"><span data-t="qStaff"></span><em data-t="optional"></em></div>
+        <input type="text" id="staff" maxlength="40" data-ph="phStaff">
+      </div>
+      <div class="group">
+        <div class="label"><span data-t="qOwn"></span><em data-t="recommended"></em></div>
+        <textarea id="own" maxlength="600" data-ph="phOwn"></textarea>
+      </div>
+      <button class="btn btn-primary" id="build"><span data-t="build"></span></button>
+      <div class="warn" id="needMore" data-t="needMore"></div>
+    </section>
+
+    <!-- STEP 2: edit + post -->
+    <section class="step" id="s2">
+      <button class="back" data-go="1">← <span data-t="back"></span></button>
+      <h2 data-t="draftTitle"></h2>
+      <p class="hint" data-t="draftHint"></p>
+      <textarea id="draft"></textarea>
+      <div class="count" id="count"></div>
+      <div class="row">
+        <button class="btn btn-ghost" id="reshuffle">↻ <span data-t="reshuffle"></span></button>
+        <button class="btn btn-ghost" id="copy">⧉ <span data-t="copy"></span></button>
+      </div>
+      <div class="stack">
+        <a class="btn btn-dark" id="post" href="#" target="_blank" rel="noopener">★ <span data-t="post"></span></a>
+      </div>
+      <p class="note" data-t="howTo"></p>
+      <p class="note" data-t="honest"></p>
+    </section>
+  </main>
+
+  <footer data-t="footer"></footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =====================================================================
+   CONFIG — change these for each outlet
+   GOOGLE_REVIEW_URL: from Google Business Profile → "Ask for reviews"
+   (looks like https://g.page/r/XXXXXXXX/review), or
+   https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID
+   ===================================================================== */
+const CONFIG = {
+  BUSINESS: "Vividus",
+  OUTLET: "Klang",
+  GOOGLE_REVIEW_URL: "", // <-- PASTE REVIEW LINK HERE
+  FALLBACK_URL: "https://www.google.com/maps/search/?api=1&query=Vividus+Klang"
+};
+
+const SERVICES = {
+  en:["foot scan & gait assessment","orthotic HeelGuard™ insoles & footwear","physiotherapy","TCM acupuncture","CLS Care Loop programme"],
+  ms:["imbasan kaki & penilaian gaya berjalan","tapak kasut ortotik & kasut HeelGuard™","fisioterapi","akupunktur TCM","program CLS Care Loop"],
+  zh:["足部扫描与步态评估","HeelGuard™ 矫正鞋垫与鞋款","物理治疗","中医针灸","CLS Care Loop 疗程"]
+};
+const HIGHLIGHTS = {
+  en:["the assessment was thorough","they explained things clearly","no hard selling, reasonable price","friendly staff","good follow-up after the visit"],
+  ms:["penilaian yang teliti","penerangan yang jelas","tiada paksaan untuk beli, harga berpatutan","staf yang mesra","susulan yang baik selepas lawatan"],
+  zh:["评估很仔细","讲解很清楚","不硬推销，价格合理","员工很亲切","之后的跟进做得好"]
+};
+
+const RECO = {
+  en:["people who stand all day","runners and sports players","elderly parents","growing kids","office workers","people travelling on holiday","people with walking or posture problems","people with foot problems like flat feet"],
+  ms:["mereka yang berdiri sepanjang hari","pelari dan ahli sukan","ibu bapa warga emas","kanak-kanak yang sedang membesar","pekerja pejabat","mereka yang melancong","mereka yang ada masalah cara berjalan atau postur","mereka yang ada masalah kaki seperti kaki rata"],
+  zh:["整天站着工作的人","跑步和运动的人","年长的父母","成长中的孩子","上班族","去旅行的人","有步态或姿势问题的人","有足部问题（如扁平足）的人"]
+};
+const T = {
+  en:{
+    tagline:"Walk Freely · Live Vividly",qRating:"Overall, how was your experience?",qReco:"Who would you recommend us to?",rateL:["Needs improvement","Fair","Good","Very good","Excellent"],rateS:["Overall, there's room for improvement.","Overall, it was okay but could be better.","Overall, a good experience.","Overall, a very good experience.","Overall, an excellent experience."],reco:["I'd recommend it to {x}.","Good for {x}."],needRating:"Please choose an overall rating first.",st1:"You",st2:"Details",st3:"Post",
+    title:"How was your visit?",
+    subtitle:"Your honest feedback on Google helps other families find the right care.",
+    whoTitle:"Who's sharing today?",whoHint:"Pick one to start.",
+    mFirst:"My first visit",mFirstS:"I just came for the first time",
+    mReturn:"I'm a returning client",mReturnS:"I've been here before",
+    mFamily:"I came with family",mFamilyS:"I brought a parent, child or partner",
+    back:"Back",pickAny:"tap any that apply",optional:"optional",recommended:"recommended",
+    qService:"What did you come in for?",qHighlight:"What stood out to you?",
+    qStaff:"Who took care of you?",phStaff:"e.g. Mei Ling",
+    qOwn:"In your own words — what was it like?",phOwn:"e.g. Standing at work all day was getting hard. After the assessment they showed me exactly why…",
+    build:"Build my draft",needMore:"Tap at least one option or write a line in your own words.",
+    draftTitle:"Your draft",draftHint:"Edit freely — it should sound like you. Change anything that isn't accurate.",
+    reshuffle:"Reword",copy:"Copy",post:"Copy & open Google Review",
+    howTo:"On Google: tap the stars you think are fair, then long-press the text box and Paste.",
+    honest:"Please only share what you actually experienced — good or bad. We don't offer rewards for reviews.",
+    footer:"Vividus · Klang, Malaysia",
+    copied:"Copied ✓",copyFail:"Select the text and copy it manually",
+    chars:"characters",
+    open:{first:["First visit to Vividus.","Came to Vividus for the first time."],return:["Back at Vividus again.","Been coming back to Vividus."],family:["Brought my family member to Vividus.","Came to Vividus with family."]},
+    svc:["I went for {x}.","I came in for {x}."],
+    hl:["What I appreciated: {x}.","Stood out: {x}."],
+    st:["Thanks to {x} for looking after me.","{x} took good care of us."],
+    and:" and "
+  },
+  ms:{
+    tagline:"Walk Freely · Live Vividly",qRating:"Secara keseluruhan, bagaimana pengalaman anda?",qReco:"Anda akan cadangkan kami kepada siapa?",rateL:["Perlu diperbaiki","Sederhana","Baik","Sangat baik","Cemerlang"],rateS:["Secara keseluruhan, masih perlu penambahbaikan.","Secara keseluruhan, okey tapi boleh diperbaiki.","Secara keseluruhan, pengalaman yang baik.","Secara keseluruhan, pengalaman yang sangat baik.","Secara keseluruhan, pengalaman yang cemerlang."],reco:["Saya cadangkan kepada {x}.","Sesuai untuk {x}."],needRating:"Sila pilih penilaian keseluruhan dahulu.",st1:"Anda",st2:"Butiran",st3:"Hantar",
+    title:"Bagaimana lawatan anda?",
+    subtitle:"Maklum balas jujur anda di Google membantu keluarga lain mencari penjagaan yang sesuai.",
+    whoTitle:"Siapa yang berkongsi hari ini?",whoHint:"Pilih satu untuk mula.",
+    mFirst:"Lawatan pertama",mFirstS:"Saya baru datang kali pertama",
+    mReturn:"Pelanggan tetap",mReturnS:"Saya pernah datang sebelum ini",
+    mFamily:"Datang bersama keluarga",mFamilyS:"Saya bawa ibu bapa, anak atau pasangan",
+    back:"Kembali",pickAny:"pilih yang berkaitan",optional:"pilihan",recommended:"digalakkan",
+    qService:"Anda datang untuk apa?",qHighlight:"Apa yang paling menonjol?",
+    qStaff:"Siapa yang menjaga anda?",phStaff:"cth. Mei Ling",
+    qOwn:"Dengan kata-kata anda sendiri — bagaimana pengalamannya?",phOwn:"cth. Berdiri sepanjang hari di tempat kerja makin susah. Selepas penilaian mereka tunjuk sebabnya…",
+    build:"Bina draf saya",needMore:"Pilih sekurang-kurangnya satu, atau tulis satu ayat sendiri.",
+    draftTitle:"Draf anda",draftHint:"Ubah sesuka hati — ia patut berbunyi seperti anda. Betulkan apa-apa yang tidak tepat.",
+    reshuffle:"Tukar ayat",copy:"Salin",post:"Salin & buka Google Review",
+    howTo:"Di Google: pilih bintang yang anda rasa adil, kemudian tekan lama kotak teks dan Tampal.",
+    honest:"Sila kongsi pengalaman sebenar sahaja — baik atau buruk. Kami tidak memberi ganjaran untuk ulasan.",
+    footer:"Vividus · Klang, Malaysia",
+    copied:"Disalin ✓",copyFail:"Pilih teks dan salin secara manual",
+    chars:"aksara",
+    open:{first:["Kali pertama ke Vividus.","Pertama kali datang ke Vividus."],return:["Datang semula ke Vividus.","Sudah beberapa kali ke Vividus."],family:["Bawa ahli keluarga ke Vividus.","Datang ke Vividus bersama keluarga."]},
+    svc:["Saya datang untuk {x}.","Datang untuk {x}."],
+    hl:["Yang saya hargai: {x}.","Yang menonjol: {x}."],
+    st:["Terima kasih {x} kerana menjaga saya dengan baik.","{x} layan kami dengan baik."],
+    and:" dan "
+  },
+  zh:{
+    tagline:"Walk Freely · Live Vividly",qRating:"整体来说，你的体验怎样？",qReco:"你会推荐给谁？",rateL:["需要改进","一般","还不错","很好","非常好"],rateS:["整体来说，还需要改进。","整体来说还可以，但有进步空间。","整体来说，体验不错。","整体来说，体验很好。","整体来说，体验非常好。"],reco:["推荐给{x}。","适合{x}。"],needRating:"请先选择整体评分。",st1:"身份",st2:"细节",st3:"发布",
+    title:"这次来得怎样？",
+    subtitle:"你在 Google 上的真实反馈，能帮其他家庭找到合适的照护。",
+    whoTitle:"今天是谁来分享？",whoHint:"选一个开始。",
+    mFirst:"第一次来",mFirstS:"我是第一次来",
+    mReturn:"回头客",mReturnS:"我之前来过",
+    mFamily:"陪家人来",mFamilyS:"我带父母、孩子或另一半来",
+    back:"返回",pickAny:"可多选",optional:"选填",recommended:"建议填写",
+    qService:"这次来做什么？",qHighlight:"哪些地方让你印象深？",
+    qStaff:"是谁照顾你的？",phStaff:"例如：Mei Ling",
+    qOwn:"用你自己的话说说——感觉怎样？",phOwn:"例如：上班整天站着越来越辛苦，评估后他们清楚告诉我原因……",
+    build:"生成我的草稿",needMore:"请至少选一项，或者自己写一句。",
+    draftTitle:"你的草稿",draftHint:"随意修改——要像你自己说的话。不准确的地方请改掉。",
+    reshuffle:"换个说法",copy:"复制",post:"复制并打开 Google 评价",
+    howTo:"在 Google 上：选你觉得公道的星数，然后长按文字框，选择粘贴。",
+    honest:"请只分享你真实的体验——好的坏的都可以。我们不会为评价提供任何奖励。",
+    footer:"Vividus · 马来西亚巴生",
+    copied:"已复制 ✓",copyFail:"请手动选取文字并复制",
+    chars:"字",
+    open:{first:["第一次来 Vividus。","第一次到 Vividus。"],return:["又回来 Vividus 了。","已经来 Vividus 好几次了。"],family:["陪家人来 Vividus。","带家人来 Vividus。"]},
+    svc:["这次做了{x}。","来做{x}。"],
+    hl:["印象深的是：{x}。","值得一提的是：{x}。"],
+    st:["谢谢 {x} 的照顾。","{x} 很用心照顾我们。"],
+    and:"和"
+  }
+};
+
+let lang = "en", mode = null, step = 0;
+const pickedS = new Set(), pickedH = new Set(), pickedR = new Set();
+let rating = 0;
+const $ = s => document.querySelector(s);
+const pick = a => a[Math.floor(Math.random()*a.length)];
+
+function joinList(arr){
+  const t = T[lang];
+  if (lang === "zh") return arr.length<2 ? arr.join("") : arr.slice(0,-1).join("、")+t.and+arr[arr.length-1];
+  if (arr.length<2) return arr.join("");
+  return arr.slice(0,-1).join(", ")+t.and+arr[arr.length-1];
+}
+function cap(s){ return lang==="zh" ? s : s.charAt(0).toUpperCase()+s.slice(1); }
+
+function renderChips(){
+  const make = (el, list, set) => {
+    el.innerHTML = "";
+    list[lang].forEach((label,i)=>{
+      const b = document.createElement("button");
+      b.className = "chip"+(set.has(i)?" on":"");
+      b.textContent = label;
+      b.onclick = ()=>{ set.has(i)?set.delete(i):set.add(i); b.classList.toggle("on"); $("#needMore").style.display="none"; };
+      el.appendChild(b);
+    });
+  };
+  make($("#chipsService"), SERVICES, pickedS);
+  make($("#chipsHighlight"), HIGHLIGHTS, pickedH);
+  make($("#chipsReco"), RECO, pickedR);
+  const r = $("#rate"); r.innerHTML = "";
+  T[lang].rateL.forEach((lab,i)=>{
+    const b = document.createElement("button");
+    b.className = rating===i+1 ? "on" : "";
+    b.innerHTML = "<b>"+(i+1)+"</b><span>"+lab+"</span>";
+    b.onclick = ()=>{ rating=i+1; $("#needMore").style.display="none"; renderChips(); updateReco(); };
+    r.appendChild(b);
+  });
+}
+function updateReco(){
+  const show = rating===0 || rating>=3;
+  $("#recoGroup").style.display = show ? "" : "none";
+  if (!show) pickedR.clear();
+}
+
+function applyLang(){
+  document.documentElement.lang = lang==="zh"?"zh-Hans":lang;
+  document.querySelectorAll("[data-t]").forEach(el=>{ const v=T[lang][el.dataset.t]; if(typeof v==="string") el.textContent=v; });
+  document.querySelectorAll("[data-ph]").forEach(el=>{ el.placeholder=T[lang][el.dataset.ph]; });
+  document.querySelectorAll(".langs button").forEach(b=>b.classList.toggle("on", b.dataset.lang===lang));
+  renderChips();
+  updateCount();
+  try{ localStorage.setItem("vv_lang",lang); }catch(e){}
+}
+
+function go(n){
+  step = n;
+  document.querySelectorAll(".step").forEach((s,i)=>s.classList.toggle("on", i===n));
+  document.querySelectorAll("#steps .dot").forEach((d,i)=>{ d.classList.toggle("on", i===n); d.classList.toggle("done", i<n); });
+  document.querySelectorAll("#steps .sep").forEach((s,i)=>s.classList.toggle("done", i<n));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function buildDraft(){
+  const t = T[lang], parts = [];
+  parts.push(pick(t.open[mode]));
+  if (rating) parts.push(t.rateS[rating-1]);
+  const s = [...pickedS].sort((a,b)=>a-b).map(i=>SERVICES[lang][i]);
+  if (s.length) parts.push(pick(t.svc).replace("{x}", joinList(s)));
+  const own = $("#own").value.trim();
+  if (own) parts.push(own);
+  const h = [...pickedH].sort((a,b)=>a-b).map(i=>HIGHLIGHTS[lang][i]);
+  if (h.length) parts.push(cap(pick(t.hl).replace("{x}", joinList(h))));
+  const r = [...pickedR].sort((a,b)=>a-b).map(i=>RECO[lang][i]);
+  if (r.length) parts.push(pick(t.reco).replace("{x}", joinList(r)));
+  const staff = $("#staff").value.trim();
+  if (staff) parts.push((mode==="family" ? pick(t.st) : t.st[0]).replace("{x}", staff));
+  return parts.join(lang==="zh" ? "" : " ");
+}
+
+function updateCount(){ const n=$("#draft").value.length; $("#count").textContent = n ? n+" "+T[lang].chars : ""; }
+
+function toast(msg){ const el=$("#toast"); el.textContent=msg; el.classList.add("show"); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove("show"),1800); }
+
+async function copyDraft(){
+  const txt = $("#draft").value;
+  try{ await navigator.clipboard.writeText(txt); toast(T[lang].copied); return true; }
+  catch(e){
+    try{ const d=$("#draft"); d.focus(); d.select(); const ok=document.execCommand("copy"); if(ok){toast(T[lang].copied);return true;} }catch(_){}
+    toast(T[lang].copyFail); return false;
+  }
+}
+
+/* events */
+document.querySelectorAll(".langs button").forEach(b=>b.onclick=()=>{
+  const wasDraft = step===2; lang=b.dataset.lang; applyLang();
+  if (wasDraft){ $("#draft").value = buildDraft(); updateCount(); }
+});
+document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>{ mode=b.dataset.mode; go(1); });
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(+b.dataset.go));
+$("#build").onclick=()=>{
+  const nm = $("#needMore");
+  if (!rating){ nm.textContent = T[lang].needRating; nm.style.display="block"; return; }
+  if (!pickedS.size && !pickedH.size && !$("#own").value.trim()){ nm.textContent = T[lang].needMore; nm.style.display="block"; return; }
+  $("#draft").value = buildDraft(); updateCount(); go(2);
+};
+$("#reshuffle").onclick=()=>{ $("#draft").value = buildDraft(); updateCount(); };
+$("#copy").onclick=copyDraft;
+$("#draft").addEventListener("input", updateCount);
+const reviewUrl = CONFIG.GOOGLE_REVIEW_URL || CONFIG.FALLBACK_URL;
+$("#post").href = reviewUrl;
+$("#post").addEventListener("click", ()=>{ copyDraft(); }); // link opens normally; copy runs in the same tap
+
+/* init */
+try{ const saved=localStorage.getItem("vv_lang"); if(saved && T[saved]) lang=saved; }catch(e){}
+applyLang(); go(0);
+</script>
+</body>
+</html>
