@@ -198,14 +198,14 @@
 const CONFIG = {
   BUSINESS: "Vividus",
   OUTLET: "Klang",
-  GOOGLE_REVIEW_URL: "", // <-- PASTE REVIEW LINK HERE
-  FALLBACK_URL: "https://www.google.com/search?q=vividus%20wellness%20reviews&source=sh/x/gs/m2/5&shem=aimgspe,#ebo=1"
+  GOOGLE_REVIEW_URL: "https://search.google.com/local/writereview?placeid=ChIJyxGnFn6tzTERFkw366rW8RQ", // Vividus Wellness
+  FALLBACK_URL: "https://maps.google.com/?cid=1509223379724880918"
 };
 
 const SERVICES = {
   en:["foot scan & gait assessment","orthotic HeelGuard™ insoles & footwear","physiotherapy","TCM acupuncture","CLS Care Loop programme"],
   ms:["imbasan kaki & penilaian gaya berjalan","tapak kasut ortotik & kasut HeelGuard™","fisioterapi","akupunktur TCM","program CLS Care Loop"],
-  zh:["足部扫描与步态评估","HeelGuard™ 矫正鞋垫与鞋款","物理治疗","中医针灸","CLS Care Loop 疗程"]
+  zh:["足部扫描与步态评估","HeelGuard™ 矫正鞋垫与鞋款","物理治疗","TCM 中医针灸","CLS Care Loop 疗程"]
 };
 const HIGHLIGHTS = {
   en:["the assessment was thorough","they explained things clearly","no hard selling, reasonable price","friendly staff","good follow-up after the visit"],
@@ -216,11 +216,11 @@ const HIGHLIGHTS = {
 const RECO = {
   en:["people who stand all day","runners and sports players","elderly parents","growing kids","office workers","people travelling on holiday","people with walking or posture problems","people with foot problems like flat feet"],
   ms:["mereka yang berdiri sepanjang hari","pelari dan ahli sukan","ibu bapa warga emas","kanak-kanak yang sedang membesar","pekerja pejabat","mereka yang melancong","mereka yang ada masalah cara berjalan atau postur","mereka yang ada masalah kaki seperti kaki rata"],
-  zh:["整天站着工作的人","跑步和运动的人","年长的父母","成长中的孩子","上班族","去旅行的人","有步态或姿势问题的人","有足部问题（如扁平足）的人"]
+  zh:["整天站着工作的人","跑步和运动的人","年长的父母","成长中的孩子","上班族","去旅行的人","有步态或体态问题的人","有足部问题（如扁平足）的人"]
 };
 const T = {
   en:{
-    tagline:"Walk Freely · Live Vividly",qRating:"Overall, how was your experience?",qReco:"Who would you recommend us to?",rateL:["Needs improvement","Fair","Good","Very good","Excellent"],rateS:["Overall, there's room for improvement.","Overall, it was okay but could be better.","Overall, a good experience.","Overall, a very good experience.","Overall, an excellent experience."],reco:["I'd recommend it to {x}.","Good for {x}."],needRating:"Please choose an overall rating first.",st1:"You",st2:"Details",st3:"Post",
+    tagline:"Walk Freely · Live Vividly",qRating:"How satisfied are you with our service?",qReco:"Who would you recommend us to?",rateL:["Needs improvement","Fair","Good","Very good","Excellent"],rateS:[["Overall, there's room for improvement.","Honestly, it needs some improvement.","There are a few things that could be improved."],["Overall, it was okay but could be better.","It was alright, with room to do better.","Decent, but not quite there yet."],["Overall, a good experience.","It was a good experience.","Good experience overall."],["Overall, a very good experience.","Really good experience.","Very happy with the visit overall."],["Overall, an excellent experience.","Excellent experience from start to finish.","Excellent experience overall."]],reco:["I'd recommend it to {x}.","Good for {x}.","Would suggest it for {x}.","Worth a visit for {x}."],needRating:"Please choose an overall rating first.",st1:"You",st2:"Details",st3:"Post",
     title:"How was your visit?",
     subtitle:"Your honest feedback on Google helps other families find the right care.",
     whoTitle:"Who's sharing today?",whoHint:"Pick one to start.",
@@ -239,14 +239,14 @@ const T = {
     footer:"Vividus · Klang, Malaysia",
     copied:"Copied ✓",copyFail:"Select the text and copy it manually",
     chars:"characters",
-    open:{first:["First visit to Vividus.","Came to Vividus for the first time."],return:["Back at Vividus again.","Been coming back to Vividus."],family:["Brought my family member to Vividus.","Came to Vividus with family."]},
-    svc:["I went for {x}.","I came in for {x}."],
-    hl:["What I appreciated: {x}.","Stood out: {x}."],
-    st:["Thanks to {x} for looking after me.","{x} took good care of us."],
+    open:{"first":["First visit to Vividus.","Came to Vividus for the first time.","My first time at Vividus.","Tried Vividus for the first time."],"return":["Back at Vividus again.","Been coming back to Vividus.","Another visit to Vividus.","Returning client at Vividus."],"family":["Brought my family member to Vividus.","Came to Vividus with family.","Accompanied a family member to Vividus.","Took my family to Vividus."]},
+    svc:["I went for {x}.","I came in for {x}.","Came for {x}.","My visit was for {x}."],
+    hl:["What I appreciated: {x}.","Stood out: {x}.","Things I liked: {x}.","Highlights for me: {x}.","Worth mentioning: {x}."],
+    st:{"me":["Thanks to {x} for looking after me.","Special thanks to {x}.","{x} was very helpful."],"us":["{x} took good care of us.","Thanks to {x} for looking after us.","{x} was very patient with us."]},
     and:" and "
   },
   ms:{
-    tagline:"Walk Freely · Live Vividly",qRating:"Secara keseluruhan, bagaimana pengalaman anda?",qReco:"Anda akan cadangkan kami kepada siapa?",rateL:["Perlu diperbaiki","Sederhana","Baik","Sangat baik","Cemerlang"],rateS:["Secara keseluruhan, masih perlu penambahbaikan.","Secara keseluruhan, okey tapi boleh diperbaiki.","Secara keseluruhan, pengalaman yang baik.","Secara keseluruhan, pengalaman yang sangat baik.","Secara keseluruhan, pengalaman yang cemerlang."],reco:["Saya cadangkan kepada {x}.","Sesuai untuk {x}."],needRating:"Sila pilih penilaian keseluruhan dahulu.",st1:"Anda",st2:"Butiran",st3:"Hantar",
+    tagline:"Walk Freely · Live Vividly",qRating:"Adakah anda berpuas hati dengan perkhidmatan kami?",qReco:"Anda akan cadangkan kami kepada siapa?",rateL:["Perlu diperbaiki","Sederhana","Baik","Sangat baik","Cemerlang"],rateS:[["Secara keseluruhan, masih perlu penambahbaikan.","Jujurnya, ada yang perlu diperbaiki.","Ada beberapa perkara yang boleh diperbaiki."],["Secara keseluruhan, okey tapi boleh diperbaiki.","Boleh tahan, tapi masih ada ruang untuk lebih baik.","Sederhana, belum cukup memuaskan."],["Secara keseluruhan, pengalaman yang baik.","Pengalaman yang baik.","Secara umumnya, baik."],["Secara keseluruhan, pengalaman yang sangat baik.","Pengalaman yang sangat baik.","Sangat berpuas hati dengan lawatan ini."],["Secara keseluruhan, pengalaman yang cemerlang.","Pengalaman yang cemerlang dari awal hingga akhir.","Sangat-sangat berpuas hati."]],reco:["Saya cadangkan kepada {x}.","Sesuai untuk {x}.","Saya syorkan untuk {x}.","Berbaloi untuk {x}."],needRating:"Sila pilih penilaian keseluruhan dahulu.",st1:"Anda",st2:"Butiran",st3:"Hantar",
     title:"Bagaimana lawatan anda?",
     subtitle:"Maklum balas jujur anda di Google membantu keluarga lain mencari penjagaan yang sesuai.",
     whoTitle:"Siapa yang berkongsi hari ini?",whoHint:"Pilih satu untuk mula.",
@@ -265,14 +265,14 @@ const T = {
     footer:"Vividus · Klang, Malaysia",
     copied:"Disalin ✓",copyFail:"Pilih teks dan salin secara manual",
     chars:"aksara",
-    open:{first:["Kali pertama ke Vividus.","Pertama kali datang ke Vividus."],return:["Datang semula ke Vividus.","Sudah beberapa kali ke Vividus."],family:["Bawa ahli keluarga ke Vividus.","Datang ke Vividus bersama keluarga."]},
-    svc:["Saya datang untuk {x}.","Datang untuk {x}."],
-    hl:["Yang saya hargai: {x}.","Yang menonjol: {x}."],
-    st:["Terima kasih {x} kerana menjaga saya dengan baik.","{x} layan kami dengan baik."],
+    open:{"first":["Kali pertama ke Vividus.","Pertama kali datang ke Vividus.","Ini lawatan pertama saya ke Vividus.","Cuba Vividus buat kali pertama."],"return":["Datang semula ke Vividus.","Sudah beberapa kali ke Vividus.","Sekali lagi ke Vividus.","Pelanggan tetap Vividus."],"family":["Bawa ahli keluarga ke Vividus.","Datang ke Vividus bersama keluarga.","Temankan ahli keluarga ke Vividus.","Bawa keluarga ke Vividus."]},
+    svc:["Saya datang untuk {x}.","Datang untuk {x}.","Lawatan saya untuk {x}.","Buat {x} di sini."],
+    hl:["Yang saya hargai: {x}.","Yang menonjol: {x}.","Apa yang saya suka: {x}.","Antara kelebihannya: {x}.","Patut disebut: {x}."],
+    st:{"me":["Terima kasih {x} kerana menjaga saya dengan baik.","Terima kasih khas kepada {x}.","{x} sangat membantu."],"us":["{x} layan kami dengan baik.","Terima kasih {x} kerana menjaga kami.","{x} sangat sabar dengan kami."]},
     and:" dan "
   },
   zh:{
-    tagline:"Walk Freely · Live Vividly",qRating:"整体来说，你的体验怎样？",qReco:"你会推荐给谁？",rateL:["需要改进","一般","还不错","很好","非常好"],rateS:["整体来说，还需要改进。","整体来说还可以，但有进步空间。","整体来说，体验不错。","整体来说，体验很好。","整体来说，体验非常好。"],reco:["推荐给{x}。","适合{x}。"],needRating:"请先选择整体评分。",st1:"身份",st2:"细节",st3:"发布",
+    tagline:"Walk Freely · Live Vividly",qRating:"您对我们的服务满意吗？",qReco:"你会推荐给谁？",rateL:["需要改进","一般","还不错","很好","非常好"],rateS:[["整体来说，还需要改进。","老实说，有些地方需要改进。","有几个地方可以做得更好。"],["整体来说还可以，但有进步空间。","还行，但可以更好。","一般般，还有进步的空间。"],["整体来说，体验不错。","体验不错。","整体还不错。"],["整体来说，体验很好。","体验很好。","这次来得很满意。"],["整体来说，体验非常好。","从头到尾体验都非常好。","非常满意这次的体验。"]],reco:["推荐给{x}。","适合{x}。","会推荐给{x}。","{x}值得来看看。"],needRating:"请先选择整体评分。",st1:"身份",st2:"细节",st3:"发布",
     title:"这次来得怎样？",
     subtitle:"你在 Google 上的真实反馈，能帮其他家庭找到合适的照护。",
     whoTitle:"今天是谁来分享？",whoHint:"选一个开始。",
@@ -291,10 +291,10 @@ const T = {
     footer:"Vividus · 马来西亚巴生",
     copied:"已复制 ✓",copyFail:"请手动选取文字并复制",
     chars:"字",
-    open:{first:["第一次来 Vividus。","第一次到 Vividus。"],return:["又回来 Vividus 了。","已经来 Vividus 好几次了。"],family:["陪家人来 Vividus。","带家人来 Vividus。"]},
-    svc:["这次做了{x}。","来做{x}。"],
-    hl:["印象深的是：{x}。","值得一提的是：{x}。"],
-    st:["谢谢 {x} 的照顾。","{x} 很用心照顾我们。"],
+    open:{"first":["第一次来 Vividus。","第一次到 Vividus。","这是我第一次来 Vividus。","第一次尝试 Vividus。"],"return":["又回来 Vividus 了。","已经来 Vividus 好几次了。","再次来到 Vividus。","Vividus 的回头客。"],"family":["陪家人来 Vividus。","带家人来 Vividus。","陪家人一起来 Vividus。","和家人一起来 Vividus。"]},
+    svc:["这次做了{x}。","来做{x}。","这次是来做{x}的。","在这里做了{x}。"],
+    hl:["印象深的是：{x}。","值得一提的是：{x}。","我喜欢的地方：{x}。","让我满意的是：{x}。","特别想说的是：{x}。"],
+    st:{"me":["谢谢 {x} 的照顾。","特别感谢 {x}。","{x} 很用心帮忙。"],"us":["{x} 很用心照顾我们。","谢谢 {x} 照顾我们。","{x} 对我们很有耐心。"]},
     and:"和"
   }
 };
@@ -360,21 +360,31 @@ function go(n){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function buildDraft(){
-  const t = T[lang], parts = [];
-  parts.push(pick(t.open[mode]));
-  if (rating) parts.push(t.rateS[rating-1]);
-  const s = [...pickedS].sort((a,b)=>a-b).map(i=>SERVICES[lang][i]);
-  if (s.length) parts.push(pick(t.svc).replace("{x}", joinList(s)));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+let lastDraft = "";
+function composeDraft(){
+  const t = T[lang], sep = lang==="zh" ? "" : " ";
+  const head = [pick(t.open[mode])];
+  if (rating) head.push(pick(t.rateS[rating-1]));
+  const mid = [];
+  const sv = shuffle([...pickedS].map(i=>SERVICES[lang][i]));
+  if (sv.length) mid.push(pick(t.svc).replace("{x}", joinList(sv)));
+  const h = shuffle([...pickedH].map(i=>HIGHLIGHTS[lang][i]));
+  if (h.length) mid.push(cap(pick(t.hl).replace("{x}", joinList(h))));
+  const body = shuffle(mid);
   const own = $("#own").value.trim();
-  if (own) parts.push(own);
-  const h = [...pickedH].sort((a,b)=>a-b).map(i=>HIGHLIGHTS[lang][i]);
-  if (h.length) parts.push(cap(pick(t.hl).replace("{x}", joinList(h))));
-  const r = [...pickedR].sort((a,b)=>a-b).map(i=>RECO[lang][i]);
-  if (r.length) parts.push(pick(t.reco).replace("{x}", joinList(r)));
+  if (own) body.splice(Math.floor(Math.random()*(body.length+1)), 0, own);
+  const tail = [];
+  const r = shuffle([...pickedR].map(i=>RECO[lang][i]));
+  if (r.length) tail.push(cap(pick(t.reco).replace("{x}", joinList(r))));
   const staff = $("#staff").value.trim();
-  if (staff) parts.push((mode==="family" ? pick(t.st) : t.st[0]).replace("{x}", staff));
-  return parts.join(lang==="zh" ? "" : " ");
+  if (staff) tail.push(pick(mode==="family" ? t.st.us : t.st.me).replace("{x}", staff));
+  return head.concat(body, shuffle(tail)).join(sep);
+}
+function buildDraft(){
+  let d = composeDraft(), tries = 0;
+  while (d === lastDraft && tries++ < 20) d = composeDraft();
+  lastDraft = d; return d;
 }
 
 function updateCount(){ const n=$("#draft").value.length; $("#count").textContent = n ? n+" "+T[lang].chars : ""; }
